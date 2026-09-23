@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { PrismaService } from '../prisma/prisma.service';
+import { UUID } from 'node:crypto';
+import { UpdateUserDto } from './dto/update-suer.dto';
 
 @Injectable()
 export class UserRepository {
@@ -15,15 +17,22 @@ export class UserRepository {
     });
   }
 
-  findOne(id: number) {
-    // TODO: get one user
+  findOne(id: UUID) {
+    return this.prisma.user.findUnique({
+      where: { id },
+    });
   }
 
-  update(id: number, body: any) {
-    // TODO: update user
+  update(id: UUID, body: UpdateUserDto) {
+    return this.prisma.user.update({
+      where: { id },
+      data: body,
+    });
   }
 
-  remove(id: number) {
-    // TODO: delete user
+  remove(id: UUID) {
+    return this.prisma.user.delete({
+      where: { id },
+    });
   }
 }

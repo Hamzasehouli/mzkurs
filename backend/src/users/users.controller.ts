@@ -4,12 +4,14 @@ import {
   Delete,
   Get,
   Param,
-  ParseIntPipe,
+  ParseUUIDPipe,
   Patch,
   Post,
 } from '@nestjs/common';
 import { UserService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
+import { type UUID } from 'node:crypto';
+import { UpdateUserDto } from './dto/update-suer.dto';
 
 @Controller('users')
 export class UserController {
@@ -26,18 +28,21 @@ export class UserController {
     return this.userService.create(body);
   }
 
+  //Find a user by id
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(@Param('id', ParseUUIDPipe) id: UUID) {
     return this.userService.findOne(id);
   }
 
+  //Update a user by id
   @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() body: any) {
+  update(@Param('id', ParseUUIDPipe) id: UUID, @Body() body: UpdateUserDto) {
     return this.userService.update(id, body);
   }
 
+  //Delete a user by id
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: number) {
+  remove(@Param('id', ParseUUIDPipe) id: UUID) {
     return this.userService.remove(id);
   }
 }
