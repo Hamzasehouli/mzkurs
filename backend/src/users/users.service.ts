@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { UserRepository } from './users.repository';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UserService {
@@ -19,7 +20,7 @@ export class UserService {
     // return user;
   }
 
-  create(body: any) {
+  create(body: CreateUserDto) {
     return this.userRepository.create(body);
   }
 
