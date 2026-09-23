@@ -6,7 +6,7 @@ import { PrismaService } from '../prisma/prisma.service';
 export class UserRepository {
   constructor(private readonly prisma: PrismaService) {}
   findAll() {
-    // TODO: get all users
+    return this.prisma.user.findMany();
   }
 
   create(body: CreateUserDto) {
