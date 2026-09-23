@@ -3,24 +3,20 @@ import { UserRepository } from './users.repository';
 
 @Injectable()
 export class UserService {
-  constructor(
-    private readonly userRepository: UserRepository,
-  ) {}
+  constructor(private readonly userRepository: UserRepository) {}
 
   findAll() {
     return this.userRepository.findAll();
   }
 
   async findOne(id: number) {
-    const user = await this.userRepository.findOne(id);
-
-    if (!user) {
-      throw new NotFoundException(
-        `User ${id} not found`,
-      );
-    }
-
-    return user;
+    // const user = await this.userRepository.findOne(id);
+    // if (!user) {
+    //   throw new NotFoundException(
+    //     `User ${id} not found`,
+    //   );
+    // }
+    // return user;
   }
 
   create(body: any) {
