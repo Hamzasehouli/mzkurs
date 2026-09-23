@@ -12,13 +12,17 @@ import { UserService } from './users.service';
 
 @Controller('users')
 export class UserController {
-  constructor(
-    private readonly userService: UserService,
-  ) {}
-
+  constructor(private readonly userService: UserService) {}
+  //Fetch all users
   @Get()
   findAll() {
     return this.userService.findAll();
+  }
+
+  //Add a new user
+  @Post()
+  create(@Body() body: any) {
+    return this.userService.create(body);
   }
 
   @Get(':id')
@@ -26,16 +30,8 @@ export class UserController {
     return this.userService.findOne(id);
   }
 
-  @Post()
-  create(@Body() body: any) {
-    return this.userService.create(body);
-  }
-
   @Patch(':id')
-  update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() body: any,
-  ) {
+  update(@Param('id', ParseIntPipe) id: number, @Body() body: any) {
     return this.userService.update(id, body);
   }
 
